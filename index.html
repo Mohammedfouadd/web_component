@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        /* Encapsulated Styles */
+        .tab-header {
+          display: flex;
+          border-bottom: 2px solid #eee;
+        }
+        .tab {
+          padding: 10px 20px;
+          cursor: pointer;
+          background-color: #f9fafb;
+          font-weight: 700;
+        }
+        .tab.styles {
+          color: #ee7214;
+          position: relative;
+        }
+        .tab.styles::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background-color: #46aa49;
+        }
+        .tab-content {
+          display: none;
+          padding: 15px;
+          box-shadow: 0px 6px 6px 0px #00000017;
+        }
+        .tab-content.active {
+          display: block;
+        }
+        .countdown-timer .time-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .value {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        tabs-component{
+          margin-bottom: 50px;
+          display: block;
+        }
+      </style>
+    
+      
+    <tabs-component>
+        <!-- Tab Headers -->
+        <div slot="tab-headers" class="tab">Details</div>
+        <div slot="tab-headers" class="tab">Reviews</div>
+        <div slot="tab-headers" class="tab">Advantages</div>
+        <div slot="tab-headers" class="tab">Questions</div>
+      
+        <!-- Tab Contents -->
+        <div slot="tab-contents" class="tab-content">
+          <p>Product details content goes here.</p>
+        </div>
+        <div slot="tab-contents" class="tab-content">
+          <p>Product reviews content goes here.</p>
+        </div>
+        <div slot="tab-contents" class="tab-content">
+          <p>Advantages content goes here.</p>
+        </div>
+        <div slot="tab-contents" class="tab-content">
+          <p>Questions content goes here.</p>
+        </div>
+      </tabs-component>
+
+    <countdown-timer 
+      date="2024-12-31" 
+      expired-message="<h2>Offer Ended</h2>" 
+      hide-seconds>
+      <span  class="hours-label" slot="hours-label">ساعة ساعة</span>
+      <span class="minutes-label" slot="minutes-label">دقيقةدقيقة</span>
+    </countdown-timer>
+
+    
+      <countdown-timer 
+      date="2024-12-31" 
+      expired-message="<h2>Offer Ended</h2>" 
+      hide-days 
+      hide-seconds
+      
+      >
+      <span slot="hours-label" class="hours-label">
+        <span>minutes</span>
+      </span>
+      <span slot="minutes-label">دقيقة</span>
+    </countdown-timer>
+  
+
+
+    <countdown-timer date="2024-12-31"></countdown-timer>
+    <countdown-timer date="31/12/2024"></countdown-timer>
+    <countdown-timer date="December 31, 2024"></countdown-timer>
+
+
+    <countdown-timer 
+      date="2024-1-31" 
+      expired-message="<h2>Offer Expired</h2>">
+    </countdown-timer>
+
+    <script src="/master.js"> </script>
+</body>
+</html>
