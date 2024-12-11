@@ -1,19 +1,5 @@
-Web Components: Countdown Timer & Tabs
-Overview
-This repository contains custom Web Components for a Countdown Timer and Tabs Component. These components are designed to be easy to use and highly customizable, providing a simple and powerful way to integrate countdowns and tabs into any web project.
-
-Key Features:
-Countdown Timer
-
-Flexible and supports multiple date formats (e.g., YYYY-MM-DD, DD/MM/YYYY, Month DD, YYYY).
-Supports dynamic updates for days, hours, minutes, and seconds.
-Allows customization via slots for labels (e.g., "Days", "Hours").
-Automatically handles expired dates with a custom message.
-Provides attributes for hiding days, hours, minutes, and seconds as needed.
-Tabs Component
-
-A simple and effective way to create tabbed content for your web applications.
-Supports dynamic content updates and easy integration with minimal code.
+# Custom Web Components Repository
+This repository contains reusable and customizable web components built using vanilla JavaScript. Below is a detailed explanation of the components available in this repository.
 Installation
 To use the components, simply include the necessary JavaScript and CSS files by adding the following <script> and <link> tags to your HTML file.
 
@@ -23,90 +9,77 @@ Copy code
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@cfa33415ec9b18bf6aa17c0014f63c71f96c479f/master.css">
 
 <!-- Include JavaScript -->
-<script src="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@cfa33415ec9b18bf6aa17c0014f63c71f96c479f/master.js"></script>
-These files will enable the use of both the Countdown Timer and Tabs components.
-
-Countdown Timer Component
-Usage
-You can use the countdown-timer component in your HTML by adding it as an element and providing the date attribute.
-
-Example:
-
-html
-Copy code
-<countdown-timer date="2024-12-31" expired-message="Time's up!">
-    <span slot="days-label">Days Left</span>
-    <span slot="hours-label">Remaining Hours</span>
-    <span slot="minutes-label">Minutes Remaining</span>
-    <span slot="seconds-label">Seconds Left</span>
+<script src="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@cfa33415ec9b18bf6aa17c0014f63c71f
+    
+## Components
+### 1. CountdownTimer Component
+A customizable countdown timer that supports multiple date formats and allows dynamic label customization using slots. The timer updates every second and can display different time units (days, hours, minutes, seconds) based on user preferences.
+#### **Usage**
+```html
+<countdown-timer
+  date="2024-12-31"
+  expired-message="Time's up!"
+  hide-days>
+  <span slot="days-label">Days</span>
+  <span slot="hours-label">Hours</span>
+  <span slot="minutes-label">Minutes</span>
+  <span slot="seconds-label">Seconds</span>
 </countdown-timer>
-Attributes:
-date: The target date for the countdown. You can use various formats (e.g., YYYY-MM-DD, DD/MM/YYYY).
-expired-message: Custom message displayed when the countdown ends.
-hide-days: Hides the days unit in the countdown.
-hide-hours: Hides the hours unit in the countdown.
-hide-minutes: Hides the minutes unit in the countdown.
-hide-seconds: Hides the seconds unit in the countdown.
-Customization
-You can customize the labels for each unit (days, hours, minutes, seconds) by using slots. The default labels will be displayed if no content is provided in the slots.
-
-Tabs Component
-Usage
-To create tabs, simply use the tabs-component element, which contains tab elements as children.
-
-Example:
-
-html
-Copy code
+```
+#### **Attributes**
+- `date` (required): Specifies the target date. Supported formats include `YYYY-MM-DD`, `DD/MM/YYYY`, and `Month DD, YYYY`.
+- `expired-message` (optional): Message displayed when the timer reaches zero.
+- `hide-days`, `hide-hours`, `hide-minutes`, `hide-seconds` (optional): Hides the respective time unit from the display.
+#### **Slots**
+- `days-label`: Label for days.
+- `hours-label`: Label for hours.
+- `minutes-label`: Label for minutes.
+- `seconds-label`: Label for seconds.
+---
+### 2. TabsComponent
+A component to create accessible and customizable tabbed navigation. It allows for dynamic switching between content sections.
+#### **Usage**
+```html
 <tabs-component>
-    <tab label="Tab 1">Content for Tab 1</tab>
-    <tab label="Tab 2">Content for Tab 2</tab>
-    <tab label="Tab 3">Content for Tab 3</tab>
+  <div slot="tab-headers">
+    <div>Tab 1</div>
+    <div>Tab 2</div>
+    <div>Tab 3</div>
+  </div>
+  <div slot="tab-contents">
+    <div>Content for Tab 1</div>
+    <div>Content for Tab 2</div>
+    <div>Content for Tab 3</div>
+  </div>
 </tabs-component>
-Customization
-Each <tab> element has a label attribute, which defines the tab's name.
-The content inside each <tab> will be shown when the corresponding tab is selected.
-How It Works
-Both the Countdown Timer and Tabs Component are built using Web Components, which means they encapsulate their functionality and styling, preventing conflicts with other parts of your application.
-
-Countdown Timer
-The timer is a custom element that calculates the difference between the current time and a specified target date.
-You can customize its appearance, hide specific time units (e.g., days or hours), and use slots to update the labels dynamically.
-Tabs Component
-The Tabs component utilizes tab elements, each representing a tab with its content. When a tab is clicked, its corresponding content is displayed.
-The component is flexible and can handle an arbitrary number of tabs.
-Example
-Here’s an example HTML page that uses both the Countdown Timer and Tabs Component:
-
-html
-Copy code
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Components Example</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@cfa33415ec9b18bf6aa17c0014f63c71f96c479f/master.css">
-</head>
-<body>
-
-    <!-- Countdown Timer -->
-    <countdown-timer date="2024-12-31" expired-message="Time's up!">
-        <span slot="days-label">Days Left</span>
-        <span slot="hours-label">Remaining Hours</span>
-        <span slot="minutes-label">Minutes Remaining</span>
-        <span slot="seconds-label">Seconds Left</span>
-    </countdown-timer>
-
-    <!-- Tabs Component -->
-    <tabs-component>
-        <tab label="Tab 1">This is the content for Tab 1</tab>
-        <tab label="Tab 2">This is the content for Tab 2</tab>
-        <tab label="Tab 3">This is the content for Tab 3</tab>
-    </tabs-component>
-
-    <script src="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@cfa33415ec9b18bf6aa17c0014f63c71f96c479f/master.js"></script>
-</body>
-</html>
-Contributing
-If you would like to contribute to this project, feel free to fork the repository and submit pull requests for any improvements or new features.
+```
+#### **Features**
+- Dynamically switches tabs and updates the active tab content.
+- Provides a default style for tabs and content sections.
+#### **Styles**
+The component includes encapsulated styles for tabs and their contents:
+- Active tabs are highlighted.
+- Active content is displayed while others are hidden.
+---
+## Getting Started
+### **Installation**
+Clone the repository to your local machine:
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+```
+Include the JavaScript file in your project:
+```html
+<script src="path/to/your/custom-elements.js" defer></script>
+```
+### **Browser Support**
+These components are built using the native Web Components API and are supported in modern browsers. For older browsers, consider using a polyfill.
+---
+## Contributing
+Contributions are welcome! Please follow these steps:
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Commit your changes with descriptive messages.
+4. Create a pull request.
+---
+## License
+This project is licensed under the MIT License. See the LICENSE file for details.
