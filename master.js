@@ -11,7 +11,7 @@ class TabsComponent extends HTMLElement {
           /* Encapsulated Styles */
           .tab-header {
             display: flex;
-            border-bottom: 2px solid #eee;
+          
           }
           .tab {
             padding: 10px 20px;
