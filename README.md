@@ -63,18 +63,37 @@ The component includes encapsulated styles for tabs and their contents:
 
 ---
 
-## Getting Started
 
-### **Installation**
-Clone the repository to your local machine:
-```bash
-git clone https://github.com/your-username/your-repo-name.git
-```
+## Installation
 
-Include the JavaScript file in your project:
+To use the components, include the following script and stylesheet in your HTML file:
+
+### Add the Script
+Include the JavaScript file to load the components:
+
 ```html
-<script src="path/to/your/custom-elements.js" defer></script>
+<script rel="stylesheet" src="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@3eb69f193234e5a5b4e846c7f7f5367061a986e4/master.js"></script>
 ```
+
+### Add the Stylesheet
+Include the CSS file to style the components:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@cfa33415ec9b18bf6aa17c0014f63c71f96c479f/master.css">
+```
+
+
+## Notes
+- Ensure that you are using the correct version of the script and stylesheet by updating the commit hash in the URLs if needed.
+- The components are built to work in modern browsers that support Web Components.
+
+## Contribution
+Feel free to fork this repository and submit pull requests to improve or add new features.
+
+## License
+This project is licensed under [Your License Here].
+
+
 
 ### **Browser Support**
 These components are built using the native Web Components API and are supported in modern browsers. For older browsers, consider using a polyfill.
