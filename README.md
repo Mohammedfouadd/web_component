@@ -80,21 +80,7 @@ Include the JavaScript file in your project:
 These components are built using the native Web Components API and are supported in modern browsers. For older browsers, consider using a polyfill.
 
 ---
-Installation
-To use the components, include the following script and stylesheet in your HTML file:
 
-Add the Script
-Include the JavaScript file to load the components:
-
-html
-Copy code
-<script rel="stylesheet" src="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@3eb69f193234e5a5b4e846c7f7f5367061a986e4/master.js"></script>
-Add the Stylesheet
-Include the CSS file to style the components:
-
-html
-Copy code
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@cfa33415e
 ## Contributing
 Contributions are welcome! Please follow these steps:
 1. Fork the repository.
