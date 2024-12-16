@@ -318,25 +318,25 @@ class CountdownTimer extends HTMLElement {
           ${!hideDays ? `
             <div class="time-unit" part="time-unit">
               <span class="js-days value" part="value">0</span>
-              <div class="days-label" part="label"><slot name="days-label">Days</slot></div>
+              <div class="days-label" part="label"><slot name="days-label">يوم</slot></div>
             </div>
           ` : ''}
           ${!hideHours ? `
             <div class="time-unit" part="time-unit">
               <span class="js-hours" part="value">0</span>
-              <div class="hours-label" part="label"><slot name="hours-label">Hours</slot></div>
+              <div class="hours-label" part="label"><slot name="hours-label">ساعة</slot></div>
             </div>
           ` : ''}
           ${!hideMinutes ? `
             <div class="time-unit" part="time-unit">
               <span class="js-minutes" part="value">0</span>
-              <div class="minutes-label" part="label"><slot name="minutes-label">Minutes</slot></div>
+              <div class="minutes-label" part="label"><slot name="minutes-label">دقيقة</slot></div>
             </div>
           ` : ''}
           ${!hideSeconds ? `
             <div class="time-unit" part="time-unit">
               <span class="js-seconds" part="value">0</span>
-              <div class="seconds-label" part="label"><slot name="seconds-label">Seconds</slot></div>
+              <div class="seconds-label" part="label"><slot name="seconds-label">ثانية</slot></div>
             </div>
           ` : ''}
         </div>
