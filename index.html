@@ -1,27 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/master.css">
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <tabs-component>
-         
-            <p slot="tab-headers" class="tab nav-button">home</p>
-            <p slot="tab-headers" class="tab nav-button">about</p>
-            <p slot="tab-headers" class="tab nav-button">somi</p>
 
-  
-          <!-- Tab Contents -->
-          
-            <div slot="tab-contents" class="tab-content">homehomehome</div>
-            <div slot="tab-contents" class="tab-content">aboutaboutabout</div>
-            <div slot="tab-contents" class="tab-content">somisomisomi</div>
-          
-      </tabs-component>
-    
+      <p slot="tab-headers" class="tab nav-button">home</p>
+      <p slot="tab-headers" class="tab nav-button">about</p>
+      <p slot="tab-headers" class="tab nav-button">somi</p>
+
+      <!-- Tab Contents -->
+
+      <div slot="tab-contents" class="tab-content">homehomehome</div>
+      <div slot="tab-contents" class="tab-content">aboutaboutabout</div>
+      <div slot="tab-contents" class="tab-content">somisomisomi</div>
+
+    </tabs-component>
+
+    <countdown-timer
+      date="2024-12-31"
+      expired-message="Happy New Year!"
+      hide-days>
+      <span slot="hours-label">ساعة</span>
+      <span slot="minutes-label">دقيقة</span>
+      <span slot="seconds-label">ثانية</span>
+    </countdown-timer>
+    <countdown-timer
+      date="2024-12-31"
+      expired-message="<h2>Offer Ended</h2>"
+      hide-seconds>
+      <span class="hours-label" slot="hours-label">H</span>
+      <span class="minutes-label" slot="minutes-label">M</span>
+    </countdown-timer>
+
+    <countdown-timer date="2024-12-31"></countdown-timer>
+    <countdown-timer date="31/12/2024"></countdown-timer>
+    <countdown-timer date="December 31, 2024"></countdown-timer>
+    <countdown-timer
+      date="2024-1-31"
+      expired-message="<h2>Offer Expired</h2>">
+    </countdown-timer>
+
     <script src="/master.js"></script>
-</body>
+  </body>
 </html>
