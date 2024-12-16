@@ -39,16 +39,16 @@ A component to create accessible and customizable tabbed navigation. It allows f
 #### **Usage**
 ```html
 <tabs-component>
-  <div slot="tab-headers">
-    <div>Tab 1</div>
-    <div>Tab 2</div>
-    <div>Tab 3</div>
-  </div>
-  <div slot="tab-contents">
-    <div>Content for Tab 1</div>
-    <div>Content for Tab 2</div>
-    <div>Content for Tab 3</div>
-  </div>
+       <!-- Tab headers -->
+      <div slot="tab-headers" class="tab nav-button">tab1</div>
+      <div slot="tab-headers" class="tab nav-button">tab2</div>
+      <div slot="tab-headers" class="tab nav-button">tab3</div>
+
+      <!-- Tab Contents -->
+
+      <div slot="tab-contents" class="tab-content">Content1</div>
+      <div slot="tab-contents" class="tab-content">Content2</div>
+      <div slot="tab-contents" class="tab-content">Content3</div>
 </tabs-component>
 ```
 
