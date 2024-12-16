@@ -1,5 +1,8 @@
 
         /* Encapsulated Styles */
+        tabs-component::part(tab-header){
+          display: flex;
+        }
         .tab-header {
             display: flex;
             border-bottom: 2px solid #eee;

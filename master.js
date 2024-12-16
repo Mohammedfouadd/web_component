@@ -7,44 +7,9 @@ class TabsComponent extends HTMLElement {
 
     // Template HTML with Styles
     container.innerHTML = `
-        <style>
-          /* Encapsulated Styles */
-          .tab-header {
-            display: flex;
-          
-          }
-          .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            background-color: #f9fafb;
-            font-weight: 700;
-          }
-          .tab.styles {
-            color: #ee7214;
-            position: relative;
-          }
-          .tab.styles::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background-color: #46aa49;
-          }
-          .tab-content {
-            display: none;
-            padding: 15px;
-            box-shadow: 0px 6px 6px 0px #00000017;
-          }
-          .tab-content.active {
-            display: block;
-          }
-        </style>
-  
         <div>
           <!-- Tab Headers -->
-          <div class="tab-header">
+          <div class="tab-header" part="tab-header">
             <slot name="tab-headers"></slot>
           </div>
   
