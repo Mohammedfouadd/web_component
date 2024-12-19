@@ -7,7 +7,7 @@ class TabsComponent extends HTMLElement {
 
     // Template HTML with Styles
     container.innerHTML = `
-        <div>
+        <div part="main-container">
           <!-- Tab Headers -->
           <div class="tab-header" part="tab-header">
             <slot name="tab-headers"></slot>
