@@ -39,16 +39,16 @@ A component to create accessible and customizable tabbed navigation. It allows f
 #### **Usage**
 ```html
 <tabs-component>
-  <div slot="tab-headers">
-    <div>Tab 1</div>
-    <div>Tab 2</div>
-    <div>Tab 3</div>
-  </div>
-  <div slot="tab-contents">
-    <div>Content for Tab 1</div>
-    <div>Content for Tab 2</div>
-    <div>Content for Tab 3</div>
-  </div>
+       <!-- Tab headers -->
+      <div slot="tab-headers" class="tab nav-button">tab1</div>
+      <div slot="tab-headers" class="tab nav-button">tab2</div>
+      <div slot="tab-headers" class="tab nav-button">tab3</div>
+
+      <!-- Tab Contents -->
+
+      <div slot="tab-contents" class="tab-content">Content1</div>
+      <div slot="tab-contents" class="tab-content">Content2</div>
+      <div slot="tab-contents" class="tab-content">Content3</div>
 </tabs-component>
 ```
 
@@ -72,14 +72,14 @@ To use the components, include the following script and stylesheet in your HTML 
 Include the JavaScript file to load the components:
 
 ```html
-<script rel="stylesheet" src="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@3eb69f193234e5a5b4e846c7f7f5367061a986e4/master.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@d856bb50109c28cc888a1ec6e6dbb497c3001771/master.js"></script>
 ```
 
 ### Add the Stylesheet
 Include the CSS file to style the components:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@cfa33415ec9b18bf6aa17c0014f63c71f96c479f/master.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Mohammedfouadd/web_component@d856bb50109c28cc888a1ec6e6dbb497c3001771/master.css">
 ```
 
 
@@ -90,8 +90,6 @@ Include the CSS file to style the components:
 ## Contribution
 Feel free to fork this repository and submit pull requests to improve or add new features.
 
-## License
-This project is licensed under [Your License Here].
 
 
 
@@ -109,5 +107,3 @@ Contributions are welcome! Please follow these steps:
 
 ---
 
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
