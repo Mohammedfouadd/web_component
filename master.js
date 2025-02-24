@@ -98,7 +98,7 @@ class CountdownTimer extends HTMLElement {
         this.renderTemplate({ hideDays, hideHours, hideMinutes, hideSeconds });
         this.startCountdown(countdownDate, expiredMessage, { hideDays, hideHours, hideMinutes, hideSeconds });
       } else {
-        this.shadowRoot.innerHTML = `<p style="color: red;">Invalid date. Please provide a valid date (e.g., YYYY-MM-DD, DD/MM/YYYY).</p>`;
+        this.shadowRoot.innerHTML = ``;
       }
     }
   
