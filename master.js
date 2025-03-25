@@ -70,158 +70,190 @@ customElements.define("tabs-component", TabsComponent);
 
 
 
-
 class CountdownTimer extends HTMLElement {
-    constructor() {
-      super();
-  
-      // Attach Shadow DOM
-      this.attachShadow({ mode: 'open' });
-  
-      // Initialize the interval timer
-      this.timer = null;
-    }
-  
-    connectedCallback() {
-      const inputDate = this.getAttribute('date');
-      const expiredMessage = this.getAttribute('expired-message') || "Time's up!";
-      const hideDays = this.hasAttribute('hide-days');
-      const hideHours = this.hasAttribute('hide-hours');
-      const hideMinutes = this.hasAttribute('hide-minutes');
-      const hideSeconds = this.hasAttribute('hide-seconds');
-  
-      const dateParts = this.parseDate(inputDate);
-  
-      if (dateParts) {
-        const { year, month, day } = dateParts;
-        const countdownDate = new Date(year, month - 1, day).getTime();
-        this.renderTemplate({ hideDays, hideHours, hideMinutes, hideSeconds });
-        this.startCountdown(countdownDate, expiredMessage, { hideDays, hideHours, hideMinutes, hideSeconds });
-      } else {
-        this.shadowRoot.innerHTML = ``;
-      }
-    }
-  
-    disconnectedCallback() {
-      clearInterval(this.timer); // Cleanup interval when the component is removed
-    }
-  
-    parseDate(input) {
-      const regex = /(?<year>\d{4})[^\d]*(?<month>\d{1,2})[^\d]*(?<day>\d{1,2})|(?<day2>\d{1,2})[^\d]*(?<month2>\d{1,2})[^\d]*(?<year2>\d{4})|(?<month3>[A-Za-z]+)[^\d]*(?<day3>\d{1,2})[^\d]*(?<year3>\d{4})/;
-  
-      const match = input.match(regex);
-  
-      if (match) {
-        let year, month, day;
-  
-        if (match.groups.year && match.groups.month && match.groups.day) {
-          year = parseInt(match.groups.year);
-          month = parseInt(match.groups.month);
-          day = parseInt(match.groups.day);
-        } else if (match.groups.day2 && match.groups.month2 && match.groups.year2) {
-          year = parseInt(match.groups.year2);
-          month = parseInt(match.groups.month2);
-          day = parseInt(match.groups.day2);
-        } else if (match.groups.month3 && match.groups.day3 && match.groups.year3) {
-          year = parseInt(match.groups.year3);
-          day = parseInt(match.groups.day3);
-          month = this.getMonthIndex(match.groups.month3);
-        }
-  
-        if (this.isValidDate(year, month, day)) {
-          return { year, month, day };
-        }
-      }
-      return null;
-    }
-  
-    getMonthIndex(monthName) {
-      const monthNames = [
-        "january", "february", "march", "april", "may", "june", "july",
-        "august", "september", "october", "november", "december"
-      ];
-      return monthNames.indexOf(monthName.toLowerCase()) + 1;
-    }
-  
-    isValidDate(year, month, day) {
-      const date = new Date(year, month - 1, day);
-      return (
-        date.getFullYear() === parseInt(year) &&
-        date.getMonth() === parseInt(month) - 1 &&
-        date.getDate() === parseInt(day)
-      );
-    }
-  
-    renderTemplate({ hideDays, hideHours, hideMinutes, hideSeconds }) {
-      this.shadowRoot.innerHTML = `
-        <style>
-          
-        </style>
-        <div class="countdown-timer" part="container">
-          ${!hideDays ? `
-            <div class="time-unit" part="time-unit">
-              <span class="js-days value" part="value">0</span>
-              <div class="days-label" part="label"><slot name="days-label">يوم</slot></div>
-            </div>
-          ` : ''}
-          ${!hideHours ? `
-            <div class="time-unit" part="time-unit">
-              <span class="js-hours" part="value">0</span>
-              <div class="hours-label" part="label"><slot name="hours-label">ساعة</slot></div>
-            </div>
-          ` : ''}
-          ${!hideMinutes ? `
-            <div class="time-unit" part="time-unit">
-              <span class="js-minutes" part="value">0</span>
-              <div class="minutes-label" part="label"><slot name="minutes-label">دقيقة</slot></div>
-            </div>
-          ` : ''}
-          ${!hideSeconds ? `
-            <div class="time-unit" part="time-unit">
-              <span class="js-seconds" part="value">0</span>
-              <div class="seconds-label" part="label"><slot name="seconds-label">ثانية</slot></div>
-            </div>
-          ` : ''}
-        </div>
-      `;
-    }
-  
-    startCountdown(targetDate, expiredMessage, { hideDays, hideHours, hideMinutes, hideSeconds }) {
-      const daysElement = this.shadowRoot.querySelector('.js-days');
-      const hoursElement = this.shadowRoot.querySelector('.js-hours');
-      const minutesElement = this.shadowRoot.querySelector('.js-minutes');
-      const secondsElement = this.shadowRoot.querySelector('.js-seconds');
-  
-      const updateTimer = () => {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-  
-        if (distance < 0) {
-          this.shadowRoot.innerHTML = `<div>${expiredMessage}</div>`;
-          clearInterval(this.timer);
-          return;
-        }
-  
-        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  
-        if (hideDays) hours += days * 24;
-        if (hideHours) minutes += hours * 60;
-        if (hideMinutes) seconds += minutes * 60;
-  
-        if (daysElement) daysElement.textContent = days;
-        if (hoursElement) hoursElement.textContent = hours;
-        if (minutesElement) minutesElement.textContent = minutes;
-        if (secondsElement) secondsElement.textContent = seconds;
-      };
-  
-      updateTimer();
-      this.timer = setInterval(updateTimer, 1000);
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.timer = null;
+  }
+
+  static get observedAttributes() {
+    return ['boxed', 'separator'];
+  }
+
+  connectedCallback() {
+    this.updateTimer();
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'boxed' || name === 'separator') {
+      this.updateTimer();
     }
   }
-  
-  // Define the custom element
-  customElements.define('countdown-timer', CountdownTimer);
-  
+
+  disconnectedCallback() {
+    clearInterval(this.timer);
+  }
+
+  updateTimer() {
+    const inputDate = this.getAttribute('date');
+    const expiredMessage = this.getAttribute('expired-message') || "Time's up!";
+    const hideDays = this.hasAttribute('hide-days');
+    const hideHours = this.hasAttribute('hide-hours');
+    const hideMinutes = this.hasAttribute('hide-minutes');
+    const hideSeconds = this.hasAttribute('hide-seconds');
+    const boxed = this.hasAttribute('boxed');
+    const separator = this.getAttribute('separator') || '';
+
+    const dateParts = this.parseDate(inputDate);
+
+    if (dateParts) {
+      const { year, month, day } = dateParts;
+      const countdownDate = new Date(year, month - 1, day).getTime();
+      this.renderTemplate({ hideDays, hideHours, hideMinutes, hideSeconds, boxed, separator });
+      this.startCountdown(countdownDate, expiredMessage, { hideDays, hideHours, hideMinutes, hideSeconds });
+    } else {
+      this.shadowRoot.innerHTML = ``;
+    }
+  }
+
+  parseDate(input) {
+    const regex = /(?<year>\d{4})[^\d]*(?<month>\d{1,2})[^\d]*(?<day>\d{1,2})|(?<day2>\d{1,2})[^\d]*(?<month2>\d{1,2})[^\d]*(?<year2>\d{4})|(?<month3>[A-Za-z]+)[^\d]*(?<day3>\d{1,2})[^\d]*(?<year3>\d{4})/;
+    const match = input.match(regex);
+
+    if (match) {
+      let year, month, day;
+
+      if (match.groups.year && match.groups.month && match.groups.day) {
+        year = parseInt(match.groups.year);
+        month = parseInt(match.groups.month);
+        day = parseInt(match.groups.day);
+      } else if (match.groups.day2 && match.groups.month2 && match.groups.year2) {
+        year = parseInt(match.groups.year2);
+        month = parseInt(match.groups.month2);
+        day = parseInt(match.groups.day2);
+      } else if (match.groups.month3 && match.groups.day3 && match.groups.year3) {
+        year = parseInt(match.groups.year3);
+        day = parseInt(match.groups.day3);
+        month = this.getMonthIndex(match.groups.month3);
+      }
+
+      if (this.isValidDate(year, month, day)) {
+        return { year, month, day };
+      }
+    }
+    return null;
+  }
+
+  getMonthIndex(monthName) {
+    const monthNames = [
+      "january", "february", "march", "april", "may", "june", "july",
+      "august", "september", "october", "november", "december"
+    ];
+    return monthNames.indexOf(monthName.toLowerCase()) + 1;
+  }
+
+  isValidDate(year, month, day) {
+    const date = new Date(year, month - 1, day);
+    return (
+      date.getFullYear() === parseInt(year) &&
+      date.getMonth() === parseInt(month) - 1 &&
+      date.getDate() === parseInt(day)
+    );
+  }
+
+  renderTemplate({ hideDays, hideHours, hideMinutes, hideSeconds, boxed, separator }) {
+    const separatorHTML = separator ? `<span class="separator">${separator}</span>` : '';
+
+    this.shadowRoot.innerHTML = `
+      <style>
+        .countdown-timer {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-family: Arial, sans-serif;
+          
+        }
+        .time-unit {
+          text-align: center;
+          ${boxed ? 'border: 1px solid gray; padding: 5px; border-radius: 3px;' : ''}
+        }
+        .value {
+          font-size: 1.5em;
+          font-weight: bold;
+        }
+        .separator {
+          font-size: 1.5em;
+          font-weight: bold;
+          margin: 0 5px;
+        }
+      </style>
+      <div class="countdown-timer" part="container">
+        ${!hideDays ? `
+          <div class="time-unit" part="time-unit">
+            <span class="js-days value" part="value">0</span>
+            <div class="days-label" part="label"><slot name="days-label">يوم</slot></div>
+          </div>
+          ${!hideHours ? separatorHTML : ''}
+        ` : ''}
+        ${!hideHours ? `
+          <div class="time-unit" part="time-unit">
+            <span class="js-hours value" part="value">0</span>
+            <div class="hours-label" part="label"><slot name="hours-label">ساعة</slot></div>
+          </div>
+          ${!hideMinutes ? separatorHTML : ''}
+        ` : ''}
+        ${!hideMinutes ? `
+          <div class="time-unit" part="time-unit">
+            <span class="js-minutes value" part="value">0</span>
+            <div class="minutes-label" part="label"><slot name="minutes-label">دقيقة</slot></div>
+          </div>
+          ${!hideSeconds ? separatorHTML : ''}
+        ` : ''}
+        ${!hideSeconds ? `
+          <div class="time-unit" part="time-unit">
+            <span class="js-seconds value" part="value">0</span>
+            <div class="seconds-label" part="label"><slot name="seconds-label">ثانية</slot></div>
+          </div>
+        ` : ''}
+      </div>
+    `;
+  }
+
+  startCountdown(targetDate, expiredMessage, { hideDays, hideHours, hideMinutes, hideSeconds }) {
+    const daysElement = this.shadowRoot.querySelector('.js-days');
+    const hoursElement = this.shadowRoot.querySelector('.js-hours');
+    const minutesElement = this.shadowRoot.querySelector('.js-minutes');
+    const secondsElement = this.shadowRoot.querySelector('.js-seconds');
+
+    const updateTimer = () => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        this.shadowRoot.innerHTML = `<div>${expiredMessage}</div>`;
+        clearInterval(this.timer);
+        return;
+      }
+
+      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      if (hideDays) hours += days * 24;
+      if (hideHours) minutes += hours * 60;
+      if (hideMinutes) seconds += minutes * 60;
+
+      if (daysElement) daysElement.textContent = days;
+      if (hoursElement) hoursElement.textContent = hours;
+      if (minutesElement) minutesElement.textContent = minutes;
+      if (secondsElement) secondsElement.textContent = seconds;
+    };
+
+    updateTimer();
+    this.timer = setInterval(updateTimer, 1000);
+  }
+}
+
+customElements.define('countdown-timer', CountdownTimer);
