@@ -104,6 +104,6 @@ Contributions are welcome! Please follow these steps:
 2. Create a new branch for your feature or bugfix.
 3. Commit your changes with descriptive messages.
 4. Create a pull request.
-
+npm web_component-1.0.0.tgz 
 ---
 
