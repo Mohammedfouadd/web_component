@@ -2,6 +2,9 @@
         /* Encapsulated Styles */
         tabs-component::part(tab-header){
           display: flex;
+          overflow-y: scroll;
+          gap: 10px;
+          scrollbar-width: none;
         }
         .tab-header {
             display: flex;
