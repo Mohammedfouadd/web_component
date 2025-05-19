@@ -1,0 +1,29 @@
+{
+  "name": "custom-elements-mf",
+  "version": "1.0.0",
+  "description": "Reusable and customizable web components built with vanilla JavaScript.",
+  "main": "dist/master.js",
+  "style": "dist/master.css",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "echo \"Add your build script here\"",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mohammedfouadd/web_component.git"
+  },
+  "keywords": [
+    "web-component",
+    "vanilla-js",
+    "custom-elements"
+  ],
+  "author": "Mohammed Fouad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mohammedfouadd/web_component/issues"
+  },
+  "homepage": "https://github.com/Mohammedfouadd/web_component#readme"
+}
